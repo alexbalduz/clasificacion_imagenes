@@ -45,9 +45,9 @@ class capa_convolucion_aumentada():
 
     def preparar_datos(self):
         preparacion = preparacion_capa_conv(self.observaciones_entrenamiento, self.observaciones_test, self.ancho_imagen, self.largo_imagen)
-        return preparacion.preparar_datos_conv()
+        return preparacion
 
-    def crear_red(self):
+    def creacion_red_neuronal(self, indice):
         preparacion = preparacion_capa_conv(self.observaciones_entrenamiento, self.observaciones_test, self.ancho_imagen, self.largo_imagen)
 
 
@@ -61,7 +61,7 @@ class capa_convolucion_aumentada():
         if indice == 0:
             nuevas_imagenes_aprendizaje = generador_imagenes.flow(preparacion.separacion_datos(2), preparacion.separacion_datos(4), batch_size=256)
             return nuevas_imagenes_aprendizaje
-        if indice==1:
+        if indice == 1:
             nuevas_imagenes_validacion = generador_imagenes.flow(preparacion.separacion_datos(3), preparacion.separacion_datos(5), batch_size=256)
             return nuevas_imagenes_validacion
 
@@ -69,7 +69,7 @@ class capa_convolucion_aumentada():
 
             creacion= RedNeuronal(self.ancho_imagen, self.largo_imagen)
 
-            historico_aprendizaje = creacion.crear_red().fit_generator(self.creacion_red_neuronal(0),
+            historico_aprendizaje = creacion.creacion_red().fit_generator(self.creacion_red_neuronal(0),
                                                             steps_per_epoch=48000//256,
                                                             epochs=50,
                                                             validation_data=self.creacion_red_neuronal(1),
@@ -131,5 +131,3 @@ def main():
     print("¡Modelo guardado!")
 
 
-if __name__ =='name':
-    main()

@@ -80,17 +80,21 @@ class capa_convolucion():
         self.largo_imagen=largo_imagen
 
     def preparacion_red(self):
-        preparacion=preparacion_capa_concolucion(self.observaciones_entrenamiento, self.ancho_imagen, self.largo_imagen)
+        preparacion=preparacion_capa_conv(self.observaciones_entrenamiento, self.ancho_imagen, self.largo_imagen)
         return preparacion
 
 
     def creacion_red(self):
 
-        preparacion=preparacion_capa_concolucion(self.observaciones_entrenamiento, self.ancho_imagen, self.largo_imagen)
+        preparacion=preparacion_capa_conv(self.observaciones_entrenamiento, self.ancho_imagen, self.largo_imagen)
         creacion= RedNeuronal(self.ancho_imagen, self.largo_imagen)
 
         #9 - Aprendizaje
-        historico_aprendizaje  = creacion.creacion_red().fit(preparacion.separacion_datos(2), preparacion.separacion_datos(4)),batch_size=256,epochs=10,verbose=1,validation_data=(preparacion.separacion_datos(3), preparacion.separacion_datos(5))
+        historico_aprendizaje  = creacion.creacion_red().fit(preparacion.separacion_datos(2), preparacion.separacion_datos(4)),
+        batch_size=256,
+        epochs=10,
+        verbose=1,
+        validation_data=(preparacion.separacion_datos(3), preparacion.separacion_datos(5))
 
 
         #10 - Evaluación del modelo
@@ -132,5 +136,3 @@ def main():
     plt.show()
 
 
-if __name__ == '__main__':
-    main()
