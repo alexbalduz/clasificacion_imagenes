@@ -44,11 +44,11 @@ class capa_convolucion_aumentada():
         self.observaciones_test = observaciones_test
 
     def preparar_datos(self):
-        preparacion = preparacion_datos_conv(self.observaciones_entrenamiento, self.observaciones_test, self.ancho_imagen, self.largo_imagen)
+        preparacion = preparacion_capa_conv(self.observaciones_entrenamiento, self.observaciones_test, self.ancho_imagen, self.largo_imagen)
         return preparacion.preparar_datos_conv()
 
     def crear_red(self):
-        preparacion = preparacion_datos_conv(self.observaciones_entrenamiento, self.observaciones_test, self.ancho_imagen, self.largo_imagen)
+        preparacion = preparacion_capa_conv(self.observaciones_entrenamiento, self.observaciones_test, self.ancho_imagen, self.largo_imagen)
 
 
         generador_imagenes = ImageDataGenerator(rotation_range=8,
@@ -79,7 +79,7 @@ class capa_convolucion_aumentada():
             return historico_aprendizaje
 
         def evaluacion_modelo (self):
-            preparacion=preparacion_capa_concolucion(self.observaciones_entrenamiento,self.observaciones_test, self.ancho_imagen, self.largo_imagen)
+            preparacion=preparacion_capa_conv(self.observaciones_entrenamiento,self.observaciones_test, self.ancho_imagen, self.largo_imagen)
 
             evaluacion = self.aprendizaje().evaluate(preparacion.separacion_datos(0), preparacion.separacion_datos(1), verbose=0)
             print('Error:', evaluacion[0])
@@ -90,15 +90,15 @@ class capa_convolucion_aumentada():
 def main():
 
     #Definición del largo y ancho de la imagen
-    LARGO_IMAGEN = 28
-    ANCHO_IMAGEN = 28
+    largo_imagen = 28
+    ancho_imagen = 28
 
     #Carga de los datos de entrenamiento
     observaciones_entrenamiento = pnd.read_csv('datas/zalando/fashion-mnist_train.csv')
     observaciones_test = pnd.read_csv('datas/zalando/fashion-mnist_test.csv')
 
 
-    convolucion_aumentada=capa_conv_aumentada(observaciones_entrenamiento, observaciones_test,ancho_imagen, largo_imagen )
+    convolucion_aumentada=capa_convolucion_aumentada(observaciones_entrenamiento, observaciones_test,ancho_imagen, largo_imagen )
     #12 - Visualización de la fase de aprendizaje
 
     #Datos de precisión (accuracy)
