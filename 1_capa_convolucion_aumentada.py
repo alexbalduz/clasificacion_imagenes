@@ -29,9 +29,12 @@
 #************************************************************************************
 
 import pandas as pnd
-import numpy as np
-from keras.utils import to_categorical
-from sklearn.model_selection import train_test_split
+from keras.layers import Dense, Dropout
+from keras.layers import Conv2D, MaxPooling2D
+from keras.preprocessing.image import ImageDataGenerator
+import matplotlib.pyplot as plt
+from preparacion.preparacion_datos_conv import preparacion_capa_conv
+from preparacion.creacion_red_neuronal import RedNeuronal
 
 class capa_convolucion_aumentada():
     def __init__(self, observaciones_entrenamiento, observaciones_test, ancho_imagen, largo_imagen):
@@ -73,7 +76,7 @@ class capa_convolucion_aumentada():
                                                             validation_steps=12000//256,
                                                             use_multiprocessing=False,
                                                             verbose=1 )
-        return historico_aprendizaje
+            return historico_aprendizaje
 
         def evaluacion_modelo (self):
             preparacion=preparacion_capa_concolucion(self.observaciones_entrenamiento,self.observaciones_test, self.ancho_imagen, self.largo_imagen)
@@ -81,7 +84,7 @@ class capa_convolucion_aumentada():
             evaluacion = self.aprendizaje().evaluate(preparacion.separacion_datos(0), preparacion.separacion_datos(1), verbose=0)
             print('Error:', evaluacion[0])
             print('Precisión:', evaluacion[1])
-        return evaluacion
+            return evaluacion
 
 
 def main():
