@@ -37,6 +37,7 @@ from preparacion.preparacion_datos_conv import preparacion_capa_conv
 from preparacion.creacion_red_neuronal import RedNeuronal
 
 class capa_convolucion_aumentada():
+    #misma estructura en capa convolucion pero con una cantidad de imagenes aumentada
     def __init__(self, observaciones_entrenamiento, observaciones_test, ancho_imagen, largo_imagen):
         self.ancho_imagen = ancho_imagen
         self.largo_imagen = largo_imagen

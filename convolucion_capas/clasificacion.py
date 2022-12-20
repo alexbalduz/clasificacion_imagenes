@@ -138,3 +138,7 @@ class clasificacion():
             print(clase + ": "+str((probabilidades[0][i]*100))+"%")
             i=i+1
 
+def main()
+    clasif_obj = clasificacion(28)
+    clasif_obj.carga_tranf_imagen()
+    clasif_obj.extraccion_probabilidades()

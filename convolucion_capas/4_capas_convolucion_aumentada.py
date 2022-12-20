@@ -93,7 +93,7 @@ class capas_convolucion4():
             return nuevas_imagenes_validacion
 
 
-#10 - Aprendizaje
+    #10 - Aprendizaje
     def aprendizaje(self):
         #start = time.clock()
         historico_aprendizaje = red_neuronal_4_capas.creacion().fit_generator(self.generador_imagenes(0),
